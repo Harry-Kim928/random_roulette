@@ -678,27 +678,42 @@ function onNameInput(value) {
   }
 }
 
+function lsGet(key) {
+  try { return localStorage.getItem(key); } catch (_) { return null; }
+}
+function lsSet(key, val) {
+  try { localStorage.setItem(key, val); } catch (_) {}
+}
+
 function tryStart() {
   const val = document.getElementById("nameInput").value;
   const matched = matchName(val);
   if (!matched) return;
   currentUser = matched.name;
-  localStorage.setItem("roulette_user", currentUser);
+  lsSet("roulette_user", currentUser);
   showScreen("main");
   renderMain();
   renderHistory();
 }
 
-// Pre-fill saved name
+// On load: auto-login if saved name is still valid, otherwise pre-fill login input
 window.addEventListener("DOMContentLoaded", () => {
-  const saved = localStorage.getItem("roulette_user");
-  if (saved) {
-    const input = document.getElementById("nameInput");
-    input.value = saved.split(" ")[0]; // pre-fill first name
-    onNameInput(input.value);
-  }
   renderMain();
   renderHistory();
+
+  const saved = lsGet("roulette_user");
+  if (saved && matchName(saved.split(" ")[0])) {
+    // Valid returning user → skip login
+    currentUser = saved;
+    showScreen("main");
+    renderMain();
+    renderHistory();
+  } else if (saved) {
+    // Saved name no longer valid (e.g. name changed) → pre-fill and let user confirm
+    const input = document.getElementById("nameInput");
+    input.value = saved.split(" ")[0];
+    onNameInput(input.value);
+  }
 });
 
 // ══════════════════════════════════════════════════════════
