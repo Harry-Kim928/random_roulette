@@ -24,33 +24,21 @@
       background: var(--bg);
       color: var(--text);
       font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      display: flex; flex-direction: column; align-items: center;
     }
 
-    /* ── Screen system ─────────────────────────── */
     .screen { display: none; width: 100%; min-height: 100vh; }
     .screen.active { display: flex; flex-direction: column; align-items: center; }
 
-    /* ══════════════════════════════════════════════
-       LOGIN
-    ══════════════════════════════════════════════ */
+    /* ══ LOGIN ══ */
     #screen-login { justify-content: center; padding: 32px 16px; }
 
     .login-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 48px 40px;
-      width: 100%;
-      max-width: 420px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 28px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 24px; padding: 48px 40px;
+      width: 100%; max-width: 420px;
+      display: flex; flex-direction: column; align-items: center; gap: 28px;
     }
-
     .login-logo { display: flex; flex-direction: column; align-items: center; gap: 10px; }
     .login-logo .icon { font-size: 3rem; line-height: 1; }
     .login-logo h1 {
@@ -59,10 +47,8 @@
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
     .login-logo .sub { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.05em; }
-
     .login-form { width: 100%; display: flex; flex-direction: column; gap: 12px; }
     .login-form label { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
-
     .login-input {
       width: 100%; padding: 14px 16px;
       background: var(--bg); border: 1px solid var(--border);
@@ -72,11 +58,9 @@
     .login-input:focus   { border-color: #a78bfa; }
     .login-input.valid   { border-color: #34d399; }
     .login-input.invalid { border-color: #f87171; }
-
     .login-hint { font-size: 0.75rem; color: var(--muted); min-height: 18px; transition: color 0.2s; }
     .login-hint.ok  { color: #34d399; }
     .login-hint.err { color: #f87171; }
-
     .start-btn {
       width: 100%; padding: 14px; font-size: 1rem; font-weight: 700;
       letter-spacing: 0.06em; border: none; border-radius: 12px;
@@ -86,9 +70,7 @@
     .start-btn:disabled { opacity: 0.3; cursor: not-allowed; }
     .start-btn:hover:not(:disabled) { opacity: 0.9; transform: scale(1.02); }
 
-    /* ══════════════════════════════════════════════
-       TOPBAR
-    ══════════════════════════════════════════════ */
+    /* ══ TOPBAR ══ */
     .topbar {
       width: 100%; max-width: 920px;
       display: flex; align-items: center; justify-content: space-between;
@@ -97,7 +79,6 @@
     .topbar-title { font-size: 0.85rem; font-weight: 700; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
     .topbar-user  { font-size: 0.8rem; color: var(--muted); }
     .topbar-right { display: flex; align-items: center; gap: 10px; }
-
     .icon-btn {
       background: none; border: 1px solid var(--border); border-radius: 10px;
       color: var(--muted); width: 36px; height: 36px;
@@ -107,9 +88,7 @@
     }
     .icon-btn:hover { border-color: #a78bfa; color: #a78bfa; background: #1a1040; }
 
-    /* ══════════════════════════════════════════════
-       MAIN HEADER (공통)
-    ══════════════════════════════════════════════ */
+    /* ══ MAIN HEADER ══ */
     .main-header { text-align: center; margin: 24px 0 32px; }
     .main-header h2 {
       font-size: 1.8rem; font-weight: 800;
@@ -119,16 +98,11 @@
     }
     .main-header p { font-size: 0.8rem; color: var(--muted); }
 
-    /* ══════════════════════════════════════════════
-       ADMIN SCREEN
-    ══════════════════════════════════════════════ */
-    #screen-admin { padding-bottom: 48px; }
-
+    /* ══ TEAM CARDS ══ */
     .teams {
       display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;
       width: 100%; max-width: 920px; padding: 0 16px; margin-bottom: 28px;
     }
-
     .team-card {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 18px; padding: 24px 20px;
@@ -141,9 +115,7 @@
     .team-card[data-team="CX"]     { --accent: var(--c-cx);  }
     .team-card.spinning { border-color: var(--accent); }
     .team-card.done     { border-color: var(--accent); box-shadow: 0 0 22px -4px var(--accent); }
-
     .team-name { font-size: 1.05rem; font-weight: 700; color: var(--accent); letter-spacing: 0.06em; }
-
     .slot-window {
       width: 100%; height: 52px; background: var(--bg);
       border-radius: 10px; border: 1px solid var(--border);
@@ -151,9 +123,7 @@
     }
     .slot-text { font-size: 1.1rem; font-weight: 700; color: #fff; white-space: nowrap; }
     .slot-text.result { color: var(--accent); font-size: 1.2rem; }
-
     .member-list { width: 100%; display: flex; flex-direction: column; gap: 6px; }
-
     .member-item {
       display: flex; align-items: center; justify-content: space-between;
       background: #12122a; border-radius: 8px; padding: 7px 10px;
@@ -167,12 +137,13 @@
     }
     .member-item.highlighted .pick-badge { background: var(--accent); color: #fff; }
 
-    /* 버튼 영역 */
+    /* ══ ADMIN ══ */
+    #screen-admin { padding-bottom: 48px; }
+
     .action-row {
       display: flex; flex-direction: column; align-items: center; gap: 14px;
-      margin-bottom: 8px;
+      margin-bottom: 8px; width: 100%; max-width: 420px; padding: 0 16px;
     }
-
     .spin-btn {
       padding: 16px 64px; font-size: 1.15rem; font-weight: 700;
       letter-spacing: 0.1em; border: none; border-radius: 999px;
@@ -185,45 +156,33 @@
     .spin-btn:active:not(:disabled) { transform: scale(0.97); }
     .spin-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
+    .label-row {
+      width: 100%; display: flex; align-items: center; gap: 10px;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .label-row.visible { opacity: 1; pointer-events: auto; }
+    .label-row-prefix { font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+    .week-label-input {
+      flex: 1; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; padding: 10px 14px; color: var(--text);
+      font-size: 0.9rem; outline: none; transition: border-color 0.2s;
+    }
+    .week-label-input:focus { border-color: #a78bfa; }
+    .week-label-input::placeholder { color: #374151; }
+
     .send-btn {
-      padding: 13px 40px; font-size: 0.95rem; font-weight: 700;
-      letter-spacing: 0.05em; border: none; border-radius: 999px;
+      width: 100%; padding: 13px; font-size: 0.95rem; font-weight: 700;
+      letter-spacing: 0.05em; border: none; border-radius: 12px;
       background: linear-gradient(135deg, #34d399, #38bdf8);
       color: #fff; cursor: pointer;
       box-shadow: 0 4px 20px rgba(52,211,153,0.3);
-      transition: transform 0.15s, opacity 0.15s, box-shadow 0.15s;
+      transition: transform 0.15s, opacity 0.15s;
     }
-    .send-btn:hover:not(:disabled) { transform: scale(1.03); }
+    .send-btn:hover:not(:disabled) { transform: scale(1.02); }
     .send-btn:disabled { opacity: 0.25; cursor: not-allowed; box-shadow: none; }
 
-    /* ══════════════════════════════════════════════
-       MEMBER SCREEN
-    ══════════════════════════════════════════════ */
+    /* ══ MEMBER ══ */
     #screen-member { padding-bottom: 48px; }
-
-    .result-display {
-      width: 100%; max-width: 860px;
-      padding: 0 16px; margin-bottom: 32px;
-      display: flex; justify-content: center;
-    }
-
-    .result-cards {
-      display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; width: 100%;
-    }
-
-    .result-card {
-      background: var(--surface);
-      border: 2px solid var(--accent, #a78bfa);
-      border-radius: 20px; padding: 32px 24px;
-      flex: 1 1 200px; min-width: 180px; max-width: 250px;
-      display: flex; flex-direction: column; align-items: center; gap: 12px;
-      box-shadow: 0 0 28px -6px var(--accent, #a78bfa);
-    }
-    .result-card-team {
-      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.12em; color: var(--accent, #a78bfa);
-    }
-    .result-card-name { font-size: 1.45rem; font-weight: 800; color: var(--text); text-align: center; }
 
     .no-result {
       display: flex; flex-direction: column; align-items: center;
@@ -233,16 +192,13 @@
     .no-result-text { font-size: 1rem; font-weight: 600; color: var(--muted); }
     .no-result-sub  { font-size: 0.8rem; color: #374151; }
 
-    /* ══════════════════════════════════════════════
-       HISTORY PANEL (공통)
-    ══════════════════════════════════════════════ */
+    /* ══ HISTORY PANEL ══ */
     .history-panel { margin-top: 12px; width: 100%; max-width: 920px; padding: 0 16px; }
     .history-inner {
       background: var(--surface); border: 1px solid var(--border);
       border-radius: 14px; padding: 20px 24px;
     }
     .panel-title { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
-
     .result-list {
       list-style: none; display: flex; flex-direction: column; gap: 8px;
       max-height: 240px; overflow-y: auto;
@@ -254,16 +210,13 @@
     }
     .result-list li:last-child { border-bottom: none; padding-bottom: 0; }
     .round-label { color: #4b5563; font-size: 0.72rem; min-width: 36px; }
-
     .result-chip {
       display: inline-flex; align-items: center; gap: 4px;
       background: #12122a; border-radius: 6px; padding: 3px 9px;
       font-weight: 600; font-size: 0.8rem;
     }
     .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-
     .history-actions { display: flex; justify-content: flex-end; margin-top: 12px; }
-
     .ghost-btn {
       font-size: 0.73rem; background: none; border: 1px solid var(--border);
       color: var(--muted); border-radius: 6px; padding: 4px 12px;
@@ -271,29 +224,18 @@
     }
     .ghost-btn:hover { border-color: #ef4444; color: #ef4444; }
 
-    /* ══════════════════════════════════════════════
-       SETTINGS SCREEN
-    ══════════════════════════════════════════════ */
+    /* ══ SETTINGS ══ */
     #screen-settings { padding-bottom: 48px; }
-
     .settings-header { text-align: center; margin: 24px 0 28px; }
     .settings-header h2 { font-size: 1.4rem; font-weight: 800; color: var(--text); margin-bottom: 4px; }
     .settings-header p  { font-size: 0.8rem; color: var(--muted); }
-
-    .settings-body {
-      width: 100%; max-width: 640px; padding: 0 16px;
-      display: flex; flex-direction: column; gap: 20px;
-    }
+    .settings-body { width: 100%; max-width: 640px; padding: 0 16px; display: flex; flex-direction: column; gap: 20px; }
     .settings-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px 24px; }
     .settings-card-title { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
     .settings-card[data-team="BizOps"] .settings-card-title { color: var(--c-biz); }
     .settings-card[data-team="CA"]     .settings-card-title { color: var(--c-ca);  }
     .settings-card[data-team="CX"]     .settings-card-title { color: var(--c-cx);  }
-
-    .settings-member-row {
-      display: flex; align-items: center; gap: 10px; padding: 8px 0;
-      border-bottom: 1px solid var(--border);
-    }
+    .settings-member-row { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
     .settings-member-row:last-child { border-bottom: none; }
     .settings-member-input {
       flex: 1; background: var(--bg); border: 1px solid var(--border);
@@ -301,9 +243,7 @@
       outline: none; transition: border-color 0.2s;
     }
     .settings-member-input:focus { border-color: #a78bfa; }
-
     .pick-info { font-size: 0.72rem; color: var(--muted); background: var(--border); border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
-
     .reset-picks-btn {
       width: 100%; padding: 12px; font-size: 0.88rem; font-weight: 600;
       background: none; border: 1px solid #ef4444; color: #ef4444;
@@ -311,7 +251,6 @@
     }
     .reset-picks-btn:hover { background: rgba(239,68,68,0.08); }
 
-    /* scrollbar */
     .result-list::-webkit-scrollbar { width: 4px; }
     .result-list::-webkit-scrollbar-track { background: transparent; }
     .result-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
@@ -319,9 +258,7 @@
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════
-     LOGIN
-═══════════════════════════════════════ -->
+<!-- ═══ LOGIN ═══ -->
 <div id="screen-login" class="screen active">
   <div class="login-box">
     <div class="login-logo">
@@ -331,8 +268,7 @@
     </div>
     <div class="login-form">
       <label for="nameInput">이름 또는 접속 키를 입력하세요</label>
-      <input
-        id="nameInput" class="login-input" type="text"
+      <input id="nameInput" class="login-input" type="text"
         placeholder="예: Harry, Owen, Lucy..."
         autocomplete="off"
         oninput="onNameInput(this.value)"
@@ -344,9 +280,7 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     ADMIN SCREEN
-═══════════════════════════════════════ -->
+<!-- ═══ ADMIN ═══ -->
 <div id="screen-admin" class="screen">
   <div class="topbar">
     <div class="topbar-title">🎰 Weekly Roulette</div>
@@ -365,6 +299,14 @@
 
   <div class="action-row">
     <button class="spin-btn" id="spinBtn" onclick="spin()">SPIN !</button>
+
+    <div class="label-row" id="labelRow">
+      <span class="label-row-prefix">주차 라벨</span>
+      <input id="weekLabel" class="week-label-input" type="text"
+        placeholder="예: 26년 3월 2주차 (선택)"
+      />
+    </div>
+
     <button class="send-btn" id="sendBtn" disabled onclick="publishResult()">📣 이번 주 결과 발송하기</button>
   </div>
 
@@ -381,9 +323,7 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     MEMBER SCREEN
-═══════════════════════════════════════ -->
+<!-- ═══ MEMBER ═══ -->
 <div id="screen-member" class="screen">
   <div class="topbar">
     <div class="topbar-title">🎰 Weekly Roulette</div>
@@ -397,13 +337,13 @@
     <p id="memberSubtitle">이번 주 뽑기 결과</p>
   </div>
 
-  <div class="result-display" id="resultDisplay">
-    <div class="no-result">
-      <div class="no-result-icon">⏳</div>
-      <div class="no-result-text">아직 발송된 결과가 없습니다</div>
-      <div class="no-result-sub">관리자가 뽑기를 완료하면 여기에 표시됩니다</div>
-    </div>
+  <div class="no-result" id="memberNoResult">
+    <div class="no-result-icon">⏳</div>
+    <div class="no-result-text">아직 발송된 결과가 없습니다</div>
+    <div class="no-result-sub">관리자가 뽑기를 완료하면 여기에 표시됩니다</div>
   </div>
+
+  <div class="teams" id="memberTeams" style="display:none;"></div>
 
   <div class="history-panel">
     <div class="history-inner">
@@ -415,9 +355,7 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     SETTINGS SCREEN
-═══════════════════════════════════════ -->
+<!-- ═══ SETTINGS ═══ -->
 <div id="screen-settings" class="screen">
   <div class="topbar">
     <div class="topbar-title">⚙️ 환경설정</div>
@@ -425,42 +363,32 @@
       <button class="icon-btn" title="뒤로" onclick="goAdmin()">←</button>
     </div>
   </div>
-
   <div class="settings-header">
     <h2>환경설정</h2>
     <p>팀 멤버 이름을 수정하거나 뽑기 기록을 초기화할 수 있습니다</p>
   </div>
-
   <div class="settings-body" id="settingsBody"></div>
 </div>
 
 <script>
-// ══════════════════════════════════════════════
-//  SUPABASE
-// ══════════════════════════════════════════════
+// ══ SUPABASE ══
 const { createClient } = supabase;
 const db = createClient(
   'https://odpbamnrezdmcmbsctdt.supabase.co',
   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9kcGJhbW5yZXpkbWNtYnNjdGR0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxODE0OTcsImV4cCI6MjA4OTc1NzQ5N30.WqkRRfscgFKCJXr3QD6ZgBPyx0pjkLO_JWrNSZE9mlg'
 );
 
-// ══════════════════════════════════════════════
-//  CONSTANTS
-// ══════════════════════════════════════════════
+// ══ CONSTANTS ══
 const ADMIN_KEY  = 'ddeokgu';
 const ADMIN_NAME = 'Liz Hyeong';
-
 const DEFAULT_TEAMS = {
   BizOps: ["Iris Gwon", "Harry Kim", "Joy Kang"],
   CA:     ["Owen Hong", "Tommy Lim", "Jane Lee"],
   CX:     ["Lucy Seo", "Sam Choi", "Rani Kim", "Luna Jo"],
 };
-
 const TEAM_COLORS = { BizOps: "#a78bfa", CA: "#38bdf8", CX: "#34d399" };
 
-// ══════════════════════════════════════════════
-//  ADMIN STATE (localStorage – 관리자 전용)
-// ══════════════════════════════════════════════
+// ══ ADMIN STATE (localStorage) ══
 function loadAdminState() {
   try {
     const raw = localStorage.getItem("roulette_admin_v3");
@@ -470,31 +398,23 @@ function loadAdminState() {
     teams: Object.fromEntries(
       Object.entries(DEFAULT_TEAMS).map(([t, names]) => [t, names.map(n => ({ name: n, picks: 0 }))])
     ),
-    history: [],
-    round: 0,
+    history: [], round: 0,
   };
 }
-
 function saveAdminState() {
   try { localStorage.setItem("roulette_admin_v3", JSON.stringify(adminState)); } catch (_) {}
 }
 
-let adminState = loadAdminState();
-
-// ══════════════════════════════════════════════
-//  SESSION
-// ══════════════════════════════════════════════
+let adminState    = loadAdminState();
 let currentUser   = null;
-let currentRole   = null;   // 'admin' | 'member'
-let pendingResult = null;   // 스핀 후, 발송 전 임시 결과
-let memberChannel = null;   // Supabase Realtime 채널
+let currentRole   = null;
+let pendingResult = null;
+let memberChannel = null;
 
-function lsGet(k)    { try { return localStorage.getItem(k); }    catch (_) { return null; } }
-function lsSet(k, v) { try { localStorage.setItem(k, v); }        catch (_) {} }
+function lsGet(k)    { try { return localStorage.getItem(k); }  catch (_) { return null; } }
+function lsSet(k, v) { try { localStorage.setItem(k, v); }     catch (_) {} }
 
-// ══════════════════════════════════════════════
-//  LOGIN
-// ══════════════════════════════════════════════
+// ══ LOGIN ══
 function matchMember(input) {
   const val = input.trim().toLowerCase();
   if (!val) return null;
@@ -526,16 +446,13 @@ function onNameInput(value) {
 
   const detected = detectRole(value);
   if (detected) {
-    if (detected.role === 'admin') {
-      hint.textContent = "✓ 관리자 모드로 접속합니다";
-      btn.textContent  = "시작하기";
-    } else {
-      hint.textContent = `✓ ${detected.name}님, 환영합니다!`;
-      btn.textContent  = "결과 확인하기";
-    }
+    hint.textContent = detected.role === 'admin'
+      ? "✓ 관리자 모드로 접속합니다"
+      : `✓ ${detected.name}님, 환영합니다!`;
     hint.className  = "login-hint ok";
     input.className = "login-input valid";
     btn.disabled    = false;
+    btn.textContent = detected.role === 'admin' ? "시작하기" : "결과 확인하기";
   } else {
     hint.textContent = "등록된 이름 또는 올바른 키를 입력해주세요.";
     hint.className  = "login-hint err";
@@ -551,58 +468,45 @@ function tryStart() {
   if (!detected) return;
   currentUser = detected.name;
   currentRole = detected.role;
-  lsSet("roulette_user", currentUser);
-  lsSet("roulette_role", currentRole);
-  navigateAfterLogin();
-}
-
-function navigateAfterLogin() {
+  // 자동 로그인 없이 멤버 입력값만 저장 (관리자 키는 저장 안 함)
+  if (detected.role === 'member') lsSet("roulette_last_input", val);
   showScreen(currentRole === 'admin' ? 'admin' : 'member');
 }
 
-// ══════════════════════════════════════════════
-//  SCREEN NAV
-// ══════════════════════════════════════════════
+// ══ SCREEN NAV ══
 function showScreen(name) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   document.getElementById(`screen-${name}`).classList.add("active");
 
   if (name === 'admin') {
     document.getElementById("adminTopbarUser").textContent = `👤 ${currentUser} (관리자)`;
-    renderAdmin();
-    renderAdminHistory();
+    renderAdmin(); renderAdminHistory();
   }
   if (name === 'member') {
     document.getElementById("memberTopbarUser").textContent = `👤 ${currentUser}`;
     initMemberView();
   }
-  if (name === 'settings') {
-    renderSettings();
-  }
+  if (name === 'settings') renderSettings();
   if (name !== 'member' && memberChannel) {
-    db.removeChannel(memberChannel);
-    memberChannel = null;
+    db.removeChannel(memberChannel); memberChannel = null;
   }
 }
 
 function goSettings() { showScreen('settings'); }
 function goAdmin()    { showScreen('admin'); }
 
-// ══════════════════════════════════════════════
-//  ADMIN – 룰렛
-// ══════════════════════════════════════════════
+// ══ ADMIN – 룰렛 ══
 function renderAdmin() {
   const container = document.getElementById("teams");
   container.innerHTML = "";
   pendingResult = null;
   document.getElementById("sendBtn").disabled = true;
+  document.getElementById("labelRow").classList.remove("visible");
 
   for (const teamKey of Object.keys(DEFAULT_TEAMS)) {
     const members = adminState.teams[teamKey];
     const card = document.createElement("div");
-    card.className = "team-card";
-    card.dataset.team = teamKey;
-    card.id = `card-${teamKey}`;
+    card.className = "team-card"; card.dataset.team = teamKey; card.id = `card-${teamKey}`;
     card.innerHTML = `
       <div class="team-name">${teamKey}</div>
       <div class="slot-window" id="slot-${teamKey}">
@@ -613,8 +517,7 @@ function renderAdmin() {
     const list = card.querySelector(`#list-${teamKey}`);
     members.forEach((m, i) => {
       const item = document.createElement("div");
-      item.className = "member-item";
-      item.id = `member-${teamKey}-${i}`;
+      item.className = "member-item"; item.id = `member-${teamKey}-${i}`;
       item.innerHTML = `
         <span class="member-name-text">${m.name}</span>
         <span class="pick-badge" id="badge-${teamKey}-${i}">${m.picks}회</span>
@@ -639,26 +542,26 @@ function spin() {
   spinning = true;
   document.getElementById("spinBtn").disabled = true;
   document.getElementById("sendBtn").disabled = true;
+  document.getElementById("labelRow").classList.remove("visible");
   pendingResult = null;
 
   const teamKeys = Object.keys(DEFAULT_TEAMS);
   const chosen   = {};
 
-  document.querySelectorAll(".member-item").forEach(el => el.classList.remove("highlighted"));
-  document.querySelectorAll(".team-card").forEach(el => el.classList.remove("done", "spinning"));
+  document.querySelectorAll("#teams .member-item").forEach(el => el.classList.remove("highlighted"));
+  document.querySelectorAll("#teams .team-card").forEach(el => el.classList.remove("done", "spinning"));
   teamKeys.forEach(k => {
     document.getElementById(`card-${k}`).classList.add("spinning");
     const st = document.getElementById(`slot-text-${k}`);
     st.className = "slot-text"; st.textContent = "?";
   });
 
-  const SPIN_MS = 2200;
-  const TICK_MS = 80;
+  const SPIN_MS = 2200, TICK_MS = 80;
 
   teamKeys.forEach((teamKey, ti) => {
     chosen[teamKey] = pickMember(teamKey);
-    const members   = adminState.teams[teamKey];
-    const slotText  = document.getElementById(`slot-text-${teamKey}`);
+    const members  = adminState.teams[teamKey];
+    const slotText = document.getElementById(`slot-text-${teamKey}`);
     const iv = setInterval(() => {
       slotText.textContent = members[Math.floor(Math.random() * members.length)].name;
     }, TICK_MS);
@@ -668,12 +571,10 @@ function spin() {
       const picked = chosen[teamKey];
       slotText.textContent = picked.name;
       slotText.className   = "slot-text result";
-
       const idx = adminState.teams[teamKey].indexOf(picked);
       document.getElementById(`member-${teamKey}-${idx}`).classList.add("highlighted");
       document.getElementById(`card-${teamKey}`).classList.remove("spinning");
       document.getElementById(`card-${teamKey}`).classList.add("done");
-
       picked.picks++;
       document.getElementById(`badge-${teamKey}-${idx}`).textContent = `${picked.picks}회`;
 
@@ -684,29 +585,27 @@ function spin() {
           picks: Object.fromEntries(Object.entries(chosen).map(([t, m]) => [t, m.name])),
         };
         adminState.history.push({ ...pendingResult });
-        saveAdminState();
-        renderAdminHistory();
+        saveAdminState(); renderAdminHistory();
         spinning = false;
         document.getElementById("spinBtn").disabled = false;
         document.getElementById("sendBtn").disabled = false;
+        document.getElementById("labelRow").classList.add("visible");
       }
     }, SPIN_MS + ti * 380);
   });
 }
 
-// ══════════════════════════════════════════════
-//  ADMIN – 발송 (Supabase 저장)
-// ══════════════════════════════════════════════
+// ══ ADMIN – 발송 ══
 async function publishResult() {
   if (!pendingResult) return;
-
-  const btn = document.getElementById("sendBtn");
-  btn.disabled = true;
-  btn.textContent = "발송 중...";
+  const btn   = document.getElementById("sendBtn");
+  const label = document.getElementById("weekLabel").value.trim();
+  btn.disabled = true; btn.textContent = "발송 중...";
 
   const payload = {
     round:        pendingResult.round,
     picks:        pendingResult.picks,
+    label:        label || null,
     published_at: new Date().toISOString(),
   };
 
@@ -716,19 +615,18 @@ async function publishResult() {
   if (e1 || e2) {
     console.error('Publish error:', e1, e2);
     alert("발송에 실패했습니다. Supabase 설정을 확인해주세요.");
-    btn.disabled = false;
-    btn.textContent = "📣 이번 주 결과 발송하기";
+    btn.disabled = false; btn.textContent = "📣 이번 주 결과 발송하기";
     return;
   }
 
   pendingResult = null;
+  document.getElementById("weekLabel").value = "";
+  document.getElementById("labelRow").classList.remove("visible");
   btn.textContent = "✓ 발송 완료!";
   setTimeout(() => { btn.textContent = "📣 이번 주 결과 발송하기"; }, 2500);
 }
 
-// ══════════════════════════════════════════════
-//  ADMIN – 기록
-// ══════════════════════════════════════════════
+// ══ ADMIN – 기록 ══
 function renderAdminHistory() {
   const list = document.getElementById("resultList");
   if (!adminState.history.length) {
@@ -754,69 +652,94 @@ function confirmResetPicks() {
     teams: Object.fromEntries(
       Object.entries(DEFAULT_TEAMS).map(([t, names]) => [t, names.map(n => ({ name: n, picks: 0 }))])
     ),
-    history: [],
-    round: 0,
+    history: [], round: 0,
   };
-  saveAdminState();
-  renderAdmin();
-  renderAdminHistory();
+  saveAdminState(); renderAdmin(); renderAdminHistory();
 }
 
-// ══════════════════════════════════════════════
-//  MEMBER – 결과 조회 (Supabase Realtime)
-// ══════════════════════════════════════════════
-async function initMemberView() {
-  // 현재 발송된 결과 조회
-  const { data } = await db.from('current_result').select('*').eq('id', 1).maybeSingle();
-  renderPublishedResult(data);
+// ══ MEMBER – 카드 렌더 ══
+function renderMemberCards() {
+  const container = document.getElementById("memberTeams");
+  container.innerHTML = "";
+  for (const teamKey of Object.keys(DEFAULT_TEAMS)) {
+    const card = document.createElement("div");
+    card.className = "team-card"; card.dataset.team = teamKey; card.id = `mcard-${teamKey}`;
+    card.innerHTML = `
+      <div class="team-name">${teamKey}</div>
+      <div class="slot-window" id="mslot-${teamKey}">
+        <span class="slot-text" id="mslot-text-${teamKey}">?</span>
+      </div>
+    `;
+    container.appendChild(card);
+  }
+}
 
-  // 발송 기록 조회
-  const { data: history } = await db.from('result_history').select('*').order('published_at', { ascending: false });
+// ══ MEMBER – 룰렛 애니메이션 (결과는 발송값 고정) ══
+function runMemberSpin(data) {
+  document.getElementById("memberNoResult").style.display = "none";
+  document.getElementById("memberTeams").style.display   = "flex";
+  document.getElementById("memberSubtitle").textContent  = data.label || `Round #${data.round}`;
+
+  const teamKeys = Object.keys(DEFAULT_TEAMS);
+
+  teamKeys.forEach(k => {
+    const card = document.getElementById(`mcard-${k}`);
+    const st   = document.getElementById(`mslot-text-${k}`);
+    if (card) card.classList.remove("done", "spinning");
+    if (st)   { st.className = "slot-text"; st.textContent = "?"; }
+  });
+
+  const SPIN_MS = 2200, TICK_MS = 80;
+
+  teamKeys.forEach((teamKey, ti) => {
+    const pickedName = data.picks[teamKey];
+    const teamNames  = adminState.teams[teamKey].map(m => m.name);
+    const slotText   = document.getElementById(`mslot-text-${teamKey}`);
+    const card       = document.getElementById(`mcard-${teamKey}`);
+    if (!slotText || !card) return;
+
+    card.classList.add("spinning");
+    const iv = setInterval(() => {
+      slotText.textContent = teamNames[Math.floor(Math.random() * teamNames.length)];
+    }, TICK_MS);
+
+    setTimeout(() => {
+      clearInterval(iv);
+      slotText.textContent = pickedName;
+      slotText.className   = "slot-text result";
+      card.classList.remove("spinning");
+      card.classList.add("done");
+    }, SPIN_MS + ti * 380);
+  });
+}
+
+// ══ MEMBER – 초기화 ══
+async function initMemberView() {
+  renderMemberCards();
+  document.getElementById("memberNoResult").style.display = "flex";
+  document.getElementById("memberTeams").style.display   = "none";
+  document.getElementById("memberSubtitle").textContent  = "이번 주 뽑기 결과";
+
+  const { data } = await db.from('current_result').select('*').eq('id', 1).maybeSingle();
+  if (data && data.picks) runMemberSpin(data);
+
+  const { data: history } = await db
+    .from('result_history').select('*').order('published_at', { ascending: false });
   renderPublishedHistory(history);
 
-  // Realtime 구독
   if (memberChannel) db.removeChannel(memberChannel);
   memberChannel = db
     .channel('result-updates')
     .on('postgres_changes', { event: '*', schema: 'public', table: 'current_result' }, payload => {
-      renderPublishedResult(payload.new);
+      renderMemberCards();
+      runMemberSpin(payload.new);
       db.from('result_history').select('*').order('published_at', { ascending: false })
         .then(({ data: h }) => renderPublishedHistory(h));
     })
     .subscribe();
 }
 
-function renderPublishedResult(data) {
-  const display  = document.getElementById("resultDisplay");
-  const subtitle = document.getElementById("memberSubtitle");
-
-  if (!data || !data.picks) {
-    subtitle.textContent = "이번 주 뽑기 결과";
-    display.innerHTML = `
-      <div class="no-result">
-        <div class="no-result-icon">⏳</div>
-        <div class="no-result-text">아직 발송된 결과가 없습니다</div>
-        <div class="no-result-sub">관리자가 뽑기를 완료하면 여기에 표시됩니다</div>
-      </div>`;
-    return;
-  }
-
-  const date = data.published_at
-    ? new Date(data.published_at).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' })
-    : '';
-  subtitle.textContent = `Round #${data.round} · ${date}`;
-
-  display.innerHTML = `
-    <div class="result-cards">
-      ${Object.entries(data.picks).map(([team, name]) => `
-        <div class="result-card" style="--accent:${TEAM_COLORS[team]}">
-          <div class="result-card-team">${team}</div>
-          <div class="result-card-name">${name}</div>
-        </div>
-      `).join("")}
-    </div>`;
-}
-
+// ══ MEMBER – 발송 기록 ══
 function renderPublishedHistory(rows) {
   const list = document.getElementById("pubHistoryList");
   if (!rows || !rows.length) {
@@ -825,7 +748,7 @@ function renderPublishedHistory(rows) {
   }
   list.innerHTML = rows.map(e => `
     <li>
-      <span class="round-label">#${e.round}</span>
+      <span class="round-label">${e.label || `#${e.round}`}</span>
       ${Object.entries(e.picks).map(([team, name]) => `
         <span class="result-chip">
           <span class="dot" style="background:${TEAM_COLORS[team]}"></span>
@@ -836,18 +759,14 @@ function renderPublishedHistory(rows) {
   `).join("");
 }
 
-// ══════════════════════════════════════════════
-//  SETTINGS (관리자 전용)
-// ══════════════════════════════════════════════
+// ══ SETTINGS ══
 function renderSettings() {
   const body = document.getElementById("settingsBody");
   body.innerHTML = "";
-
   for (const teamKey of Object.keys(DEFAULT_TEAMS)) {
     const members = adminState.teams[teamKey];
     const card = document.createElement("div");
-    card.className = "settings-card";
-    card.dataset.team = teamKey;
+    card.className = "settings-card"; card.dataset.team = teamKey;
     card.innerHTML = `
       <div class="settings-card-title">${teamKey}</div>
       ${members.map((m, i) => `
@@ -859,7 +778,6 @@ function renderSettings() {
     `;
     body.appendChild(card);
   }
-
   const resetCard = document.createElement("div");
   resetCard.className = "settings-card";
   resetCard.innerHTML = `
@@ -870,34 +788,19 @@ function renderSettings() {
 }
 
 function updateName(teamKey, idx, value) {
-  adminState.teams[teamKey][idx].name = value;
-  saveAdminState();
+  adminState.teams[teamKey][idx].name = value; saveAdminState();
 }
 
-// ══════════════════════════════════════════════
-//  INIT
-// ══════════════════════════════════════════════
+// ══ INIT – 자동 로그인 없이 입력값만 복원 ══
 window.addEventListener("DOMContentLoaded", () => {
-  const savedUser = lsGet("roulette_user");
-  const savedRole = lsGet("roulette_role");
-
-  if (savedUser && savedRole) {
-    let valid = false;
-    if (savedRole === 'admin' && savedUser === ADMIN_NAME) valid = true;
-    if (savedRole === 'member' && matchMember(savedUser.split(" ")[0])) valid = true;
-    if (valid) {
-      currentUser = savedUser;
-      currentRole = savedRole;
-      navigateAfterLogin();
-      return;
+  const lastInput = lsGet("roulette_last_input");
+  if (lastInput) {
+    const detected = detectRole(lastInput);
+    if (detected && detected.role === 'member') {
+      const input = document.getElementById("nameInput");
+      input.value = lastInput;
+      onNameInput(lastInput);
     }
-  }
-
-  // 저장된 이름 있으면 미리 채움
-  if (savedUser) {
-    const input = document.getElementById("nameInput");
-    input.value = savedUser.split(" ")[0];
-    onNameInput(input.value);
   }
 });
 </script>
