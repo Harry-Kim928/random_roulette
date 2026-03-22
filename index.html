@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>팀 룰렛</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: #0f0f1a;
+      color: #fff;
+      font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px 48px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #a78bfa, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-bottom: 36px;
+    }
+
+    /* ── Teams row ── */
+    .teams {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      max-width: 860px;
+      margin-bottom: 36px;
+    }
+
+    .team-card {
+      background: #1a1a2e;
+      border: 1px solid #2d2d4e;
+      border-radius: 18px;
+      padding: 24px 20px;
+      flex: 1 1 240px;
+      min-width: 220px;
+      max-width: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      transition: border-color 0.3s;
+    }
+
+    .team-card.spinning { border-color: var(--accent); }
+    .team-card.done     { border-color: var(--accent); box-shadow: 0 0 20px -4px var(--accent); }
+
+    .team-card[data-team="BizOps"] { --accent: #a78bfa; }
+    .team-card[data-team="CA"]     { --accent: #38bdf8; }
+    .team-card[data-team="CX"]     { --accent: #34d399; }
+
+    .team-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Slot display ── */
+    .slot-window {
+      width: 100%;
+      height: 52px;
+      background: #0f0f1a;
+      border-radius: 10px;
+      border: 1px solid #2d2d4e;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slot-text {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      transition: none;
+      white-space: nowrap;
+    }
+
+    .slot-text.result {
+      color: var(--accent);
+      font-size: 1.3rem;
+    }
+
+    /* ── Member list ── */
+    .member-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .member-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #12122a;
+      border-radius: 8px;
+      padding: 6px 10px;
+      border: 1px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .member-item.highlighted {
+      background: #1e1040;
+      border-color: var(--accent);
+    }
+
+    .member-name-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .member-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      outline: none;
+      border: none;
+      background: transparent;
+      color: #e5e7eb;
+      width: 90px;
+      cursor: text;
+    }
+
+    .member-name:focus { color: #fff; border-bottom: 1px solid #4b5563; }
+
+    .pick-badge {
+      font-size: 0.7rem;
+      background: #2d2d4e;
+      color: #9ca3af;
+      padding: 2px 6px;
+      border-radius: 999px;
+      min-width: 28px;
+      text-align: center;
+    }
+
+    .member-item.highlighted .pick-badge {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    /* ── Spin button ── */
+    .spin-btn {
+      padding: 16px 56px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #a78bfa, #38bdf8);
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 4px 24px rgba(167,139,250,0.35);
+      transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+    }
+
+    .spin-btn:hover:not(:disabled) { transform: scale(1.04); box-shadow: 0 6px 32px rgba(167,139,250,0.5); }
+    .spin-btn:active:not(:disabled) { transform: scale(0.97); }
+    .spin-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    /* ── Result panel ── */
+    .result-panel {
+      margin-top: 32px;
+      width: 100%;
+      max-width: 860px;
+      background: #1a1a2e;
+      border: 1px solid #2d2d4e;
+      border-radius: 14px;
+      padding: 20px 24px;
+    }
+
+    .result-title {
+      font-size: 0.75rem;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .result-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+
+    .result-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: #9ca3af;
+      border-bottom: 1px solid #2d2d4e;
+      padding-bottom: 6px;
+    }
+
+    .result-list li:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .result-list .round-label { color: #6b7280; font-size: 0.75rem; min-width: 40px; }
+
+    .result-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #12122a;
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .dot-BizOps { background: #a78bfa; }
+    .dot-CA     { background: #38bdf8; }
+    .dot-CX     { background: #34d399; }
+
+    .reset-btn {
+      margin-top: 12px;
+      font-size: 0.75rem;
+      background: none;
+      border: 1px solid #374151;
+      color: #6b7280;
+      border-radius: 6px;
+      padding: 4px 12px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .reset-btn:hover { border-color: #ef4444; color: #ef4444; }
+
+    /* scrollbar */
+    .result-list::-webkit-scrollbar { width: 4px; }
+    .result-list::-webkit-scrollbar-track { background: transparent; }
+    .result-list::-webkit-scrollbar-thumb { background: #374151; border-radius: 2px; }
+  </style>
+</head>
+<body>
+
+  <h1>🎰 팀 룰렛</h1>
+  <p class="subtitle">이름을 클릭하면 직접 수정할 수 있어요 · 뽑힘 횟수가 적은 사람이 우선 선택됩니다</p>
+
+  <div class="teams" id="teams"></div>
+
+  <button class="spin-btn" id="spinBtn" onclick="spin()">SPIN !</button>
+
+  <div class="result-panel">
+    <div class="result-title">뽑기 기록</div>
+    <ul class="result-list" id="resultList">
+      <li style="color:#4b5563;">아직 뽑힌 인원이 없습니다.</li>
+    </ul>
+    <button class="reset-btn" onclick="resetAll()">전체 초기화</button>
+  </div>
+
+<script>
+// ── Initial data ──────────────────────────────────────────────────────────────
+const DEFAULT_TEAMS = {
+  BizOps: ["이름1", "이름2", "이름3"],
+  CA:     ["이름1", "이름2", "이름3"],
+  CX:     ["이름1", "이름2", "이름3", "이름4"],
+};
+
+// ── State (persisted in localStorage) ─────────────────────────────────────────
+function loadState() {
+  try {
+    const raw = localStorage.getItem("roulette_state");
+    if (raw) return JSON.parse(raw);
+  } catch (_) {}
+  // Build default
+  const state = { teams: {}, history: [] };
+  for (const [team, names] of Object.entries(DEFAULT_TEAMS)) {
+    state.teams[team] = names.map(name => ({ name, picks: 0 }));
+  }
+  return state;
+}
+
+function saveState() {
+  localStorage.setItem("roulette_state", JSON.stringify(state));
+}
+
+let state = loadState();
+
+// ── Fair selection ─────────────────────────────────────────────────────────────
+// Among members with the minimum pick count, choose randomly.
+function pickMember(teamKey) {
+  const members = state.teams[teamKey];
+  const minPicks = Math.min(...members.map(m => m.picks));
+  const pool = members.filter(m => m.picks === minPicks);
+  return pool[Math.floor(Math.random() * pool.length)];
+}
+
+// ── Render ────────────────────────────────────────────────────────────────────
+function render() {
+  const container = document.getElementById("teams");
+  container.innerHTML = "";
+
+  for (const teamKey of Object.keys(DEFAULT_TEAMS)) {
+    const members = state.teams[teamKey];
+    const card = document.createElement("div");
+    card.className = "team-card";
+    card.dataset.team = teamKey;
+    card.id = `card-${teamKey}`;
+
+    card.innerHTML = `
+      <div class="team-name">${teamKey}</div>
+      <div class="slot-window" id="slot-${teamKey}">
+        <span class="slot-text" id="slot-text-${teamKey}">?</span>
+      </div>
+      <div class="member-list" id="list-${teamKey}"></div>
+    `;
+
+    const list = card.querySelector(`#list-${teamKey}`);
+    members.forEach((m, i) => {
+      const item = document.createElement("div");
+      item.className = "member-item";
+      item.id = `member-${teamKey}-${i}`;
+      item.innerHTML = `
+        <div class="member-name-wrap">
+          <input class="member-name" value="${m.name}"
+            oninput="updateName('${teamKey}', ${i}, this.value)"
+            title="클릭하여 이름 수정" />
+        </div>
+        <span class="pick-badge" id="badge-${teamKey}-${i}">${m.picks}회</span>
+      `;
+      list.appendChild(item);
+    });
+
+    container.appendChild(card);
+  }
+}
+
+function updateName(teamKey, idx, value) {
+  state.teams[teamKey][idx].name = value;
+  saveState();
+}
+
+// ── Spin animation ─────────────────────────────────────────────────────────────
+let spinning = false;
+
+function spin() {
+  if (spinning) return;
+  spinning = true;
+  document.getElementById("spinBtn").disabled = true;
+
+  const teamKeys = Object.keys(DEFAULT_TEAMS);
+  const chosen = {};       // final picks
+  const intervals = {};    // animation intervals
+
+  // Clear previous highlights
+  document.querySelectorAll(".member-item").forEach(el => el.classList.remove("highlighted"));
+  document.querySelectorAll(".team-card").forEach(el => el.classList.remove("done"));
+  teamKeys.forEach(k => {
+    const el = document.getElementById(`card-${k}`);
+    el.classList.add("spinning");
+    const slotText = document.getElementById(`slot-text-${k}`);
+    slotText.className = "slot-text";
+    slotText.textContent = "?";
+  });
+
+  const SPIN_DURATION = 2200; // ms
+  const INTERVAL = 80;        // ms between name flickers
+
+  teamKeys.forEach((teamKey, ti) => {
+    const members = state.teams[teamKey];
+    chosen[teamKey] = pickMember(teamKey);
+
+    const slotText = document.getElementById(`slot-text-${teamKey}`);
+    let tick = 0;
+
+    intervals[teamKey] = setInterval(() => {
+      // Show random name while spinning
+      const rand = members[Math.floor(Math.random() * members.length)];
+      slotText.textContent = rand.name;
+      tick++;
+    }, INTERVAL);
+
+    // Stagger each team's resolution slightly for drama
+    const delay = SPIN_DURATION + ti * 350;
+    setTimeout(() => {
+      clearInterval(intervals[teamKey]);
+
+      // Land on chosen
+      const picked = chosen[teamKey];
+      slotText.textContent = picked.name;
+      slotText.className = "slot-text result";
+
+      // Highlight in list
+      const idx = state.teams[teamKey].indexOf(picked);
+      document.getElementById(`member-${teamKey}-${idx}`).classList.add("highlighted");
+
+      // Card done
+      const card = document.getElementById(`card-${teamKey}`);
+      card.classList.remove("spinning");
+      card.classList.add("done");
+
+      // Update picks
+      picked.picks++;
+      document.getElementById(`badge-${teamKey}-${idx}`).textContent = `${picked.picks}회`;
+
+      // If last team, finalize
+      if (ti === teamKeys.length - 1) {
+        saveState();
+        addHistoryEntry(chosen);
+        spinning = false;
+        document.getElementById("spinBtn").disabled = false;
+      }
+    }, delay);
+  });
+}
+
+// ── History ───────────────────────────────────────────────────────────────────
+function addHistoryEntry(chosen) {
+  const round = (state.history.length || 0) + 1;
+  const entry = { round, picks: {} };
+  for (const [team, member] of Object.entries(chosen)) {
+    entry.picks[team] = member.name;
+  }
+  state.history.push(entry);
+  saveState();
+  renderHistory();
+}
+
+function renderHistory() {
+  const list = document.getElementById("resultList");
+  if (!state.history.length) {
+    list.innerHTML = '<li style="color:#4b5563;">아직 뽑힌 인원이 없습니다.</li>';
+    return;
+  }
+  list.innerHTML = [...state.history].reverse().map(entry => `
+    <li>
+      <span class="round-label">#${entry.round}</span>
+      ${Object.entries(entry.picks).map(([team, name]) => `
+        <span class="result-chip">
+          <span class="dot dot-${team}"></span>
+          <span style="color:var(--accent-${team})">${team}</span>&nbsp;${name}
+        </span>
+      `).join("")}
+    </li>
+  `).join("");
+
+  // inject CSS vars for chips (since they're outside cards)
+  list.querySelectorAll(".result-chip").forEach(chip => {
+    const team = chip.querySelector(".dot").classList[1].replace("dot-","");
+    const colors = { BizOps: "#a78bfa", CA: "#38bdf8", CX: "#34d399" };
+    chip.style.setProperty("--accent-" + team, colors[team]);
+    chip.querySelector("span:nth-child(2)").style.color = colors[team];
+  });
+}
+
+// ── Reset ─────────────────────────────────────────────────────────────────────
+function resetAll() {
+  if (!confirm("모든 뽑기 기록과 횟수를 초기화할까요?")) return;
+  for (const members of Object.values(state.teams)) {
+    members.forEach(m => m.picks = 0);
+  }
+  state.history = [];
+  saveState();
+  render();
+  renderHistory();
+
+  document.querySelectorAll(".slot-text").forEach(el => {
+    el.className = "slot-text";
+    el.textContent = "?";
+  });
+  document.querySelectorAll(".team-card").forEach(el => {
+    el.classList.remove("done","spinning");
+  });
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+render();
+renderHistory();
+</script>
+</body>
+</html>
